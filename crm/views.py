@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from .forms import SignUpForm
+from django.contrib.auth.models import User
 # Create your views here.
 def home(request):
     if request.method == 'POST':
@@ -17,7 +18,9 @@ def home(request):
            messages.error(request,"Login Failed!")
            return render(request,"home.html")
     else:
-        return render(request,"home.html")
+        if request.user.is_authenticated: 
+            users = User.objects.all()
+            return render(request,"home.html",context = {'users':users} )
 def logout_user(request):
     logout(request)
     return render(request,'home.html')
