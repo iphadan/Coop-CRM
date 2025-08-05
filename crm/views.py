@@ -12,7 +12,7 @@ def home(request):
         if not user is None:
             login(request,user)
             messages.success(request, "Login Successful!")
-            redirect('home')
+            return redirect('home')
         else:
            messages.error(request,"Login Failed!")
            return render(request,"home.html")
