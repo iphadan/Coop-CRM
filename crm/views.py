@@ -3,6 +3,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from .forms import SignUpForm
 from django.contrib.auth.models import User
+from . import models
 # Create your views here.
 def home(request):
     if request.method == 'POST':
@@ -20,7 +21,9 @@ def home(request):
     else:
         if request.user.is_authenticated: 
             users = User.objects.all()
-            return render(request,"home.html",context = {'users':users} )
+            customers = models.Customer.objects.all()
+            context = {'users':users,'customers':customers}
+            return render(request,"home.html",context )
 def logout_user(request):
     logout(request)
     return render(request,'home.html')
@@ -43,3 +46,16 @@ def register(request):
     
     
 
+def showUser(request,pk):
+    user = User.objects.get(id=pk)
+    if user is not None:
+        context = {
+            'user':user
+        }
+        return render(request,'showUser.html',context)
+    
+    else:
+        messages.error(request,'user does not exist')
+        return render(request,'home.html')
+def showCustomer(request,pk):
+    pass
