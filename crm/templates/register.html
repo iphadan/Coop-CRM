@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{%  block content %}
+    <div class="messages">
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+ {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+    </div>
+
+
+
+
+
+<form action="{% url 'register' %}" method="post" >
+    {% csrf_token %}
+   
+  <div class="row mb-3">
+ 
+  {{ form.as_p }}
+
+  </div>
+
+ 
+  <button type="submit" class="btn btn-secondary">Sign Up</button>
+</form>
+
+{% endblock %}
