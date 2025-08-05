@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+
+    {% block content %}
+ <div class="container center">
+    <div class="messages">
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+ {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+    </div>
+    {% if not request.is_authenticated %}
+<form action="{% url 'home' %}" method="post" >
+    {% csrf_token %}
+   
+  <div class="row mb-3">
+    <label for="username" class="col-sm-2 col-form-label">username</label>
+    <div class="col-sm-4">
+      <input type="username" class="form-control" id="username" name="username" >
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="password" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-4">
+      <input type="password" class="form-control" id="password" name="password">
+    </div>
+  </div>
+
+ 
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+
+
+{% else %}
+<table class="table table-striped me-auto">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>John</td>
+      <td>Doe</td>
+      <td>@social</td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+    </div>
+
+
+
+
+
+
+    {% endblock %}
