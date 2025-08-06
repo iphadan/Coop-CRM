@@ -1,7 +1,48 @@
 {% extends 'base.html' %}
 
 
-
 {% block content %}
+{% if customer %}
 
+<div class="container">
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{customer.first_name.capitalize }} {{customer.last_name}}</h5>
+       
+
+<ul class="list-group">
+  <li class="list-group-item">customername:- {{customer.customername}}</li>
+  <li class="list-group-item">Address:- {{customer.address}}</li>
+  <li class="list-group-item">Email:- {{customer.email}}</li>
+  <li class="list-group-item">zip code:- {{customer.zipCode}}</li>
+  <li class="list-group-item">Joined:- @{{customer.dateCreatedAt}}</li>
+</ul> 
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+{% else %}
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+ {{ message }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+
+
+{% endfor %}
+{% endif %}
 {% endblock %}

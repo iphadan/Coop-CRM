@@ -46,17 +46,19 @@
       <th scope="col">Last name</th>
       <th scope="col"> Username </th>
             <th scope="col">Email</th>
+            <th>View</th>
 
     </tr>
   </thead>
   <tbody>
     {% for user in users%}
-    <tr>
+  <tr>
       <th scope="row">{{user.id}}</th>
       <td>{{user.fist_name}}</td>
       <td>{{user.last_name}}</td>
-      <td><a href="{% url 'showUser' user.id %}">{{user.username}}</a></td>
-            <td>{{user.email}}</td>
+      <td>{{user.username}}</td>
+      <td>{{user.email}}</td>
+      <td ><a href="{% url 'showUser' user.id %}"  class="bi bi-eye-fill"></a>  </td> 
 
     </tr>
 
@@ -83,6 +85,9 @@
       <th scope="col">Address</th>
       <th scope="col">Zip Code</th>
       <th scope="col">Created At</th>
+            <th scope="col">View</th>
+
+      
 
 
     </tr>
@@ -98,6 +103,7 @@
             <td>{{user.address}}</td>
             <td>{{user.zipCode}}</td>
             <td>{{user.dateCreatedAt}}</td>
+                 <td ><a href="{% url 'showCustomer' user.id %}"  class="bi bi-eye-fill"></a>  </td> 
 
     </tr>
 

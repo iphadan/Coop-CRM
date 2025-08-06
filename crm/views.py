@@ -58,4 +58,13 @@ def showUser(request,pk):
         messages.error(request,'user does not exist')
         return render(request,'home.html')
 def showCustomer(request,pk):
-    pass
+    customer = models.Customer.objects.get(id=pk)
+    if customer is not None:
+        context = {
+            'customer':customer
+        }
+        return render(request,'showCustomer.html',context)
+    
+    else:
+        messages.error(request,'Customer does not exist')
+        return render(request,'home.html')
