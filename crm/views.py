@@ -24,6 +24,7 @@ def home(request):
             customers = models.Customer.objects.all()
             context = {'users':users,'customers':customers}
             return render(request,"home.html",context )
+    return render(request,'home.html')
 def logout_user(request):
     logout(request)
     return render(request,'home.html')
@@ -47,24 +48,28 @@ def register(request):
     
 
 def showUser(request,pk):
-    user = User.objects.get(id=pk)
-    if user is not None:
-        context = {
-            'user':user
-        }
-        return render(request,'showUser.html',context)
-    
-    else:
-        messages.error(request,'user does not exist')
-        return render(request,'home.html')
+    if request.user.is_authenticated:
+        user = User.objects.get(id=pk)
+        if user is not None:
+            context = {
+                'user':user
+            }
+            return render(request,'showUser.html',context)
+        
+        else:
+            messages.error(request,'user does not exist')
+            return render(request,'home.html')
+    return redirect('home')
 def showCustomer(request,pk):
-    customer = models.Customer.objects.get(id=pk)
-    if customer is not None:
-        context = {
-            'customer':customer
-        }
-        return render(request,'showCustomer.html',context)
-    
-    else:
-        messages.error(request,'Customer does not exist')
-        return render(request,'home.html')
+    if request.user.is_authenticated:
+        customer = models.Customer.objects.get(id=pk)
+        if customer is not None:
+            context = {
+                'customer':customer
+            }
+            return render(request,'showCustomer.html',context)
+        
+        else:
+            messages.error(request,'Customer does not exist')
+            return render(request,'home.html')
+    return redirect('home')
