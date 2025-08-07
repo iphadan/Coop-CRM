@@ -31,7 +31,6 @@ def logout_user(request):
 
 
 def register(request):
-
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid() : 
@@ -73,3 +72,25 @@ def showCustomer(request,pk):
             messages.error(request,'Customer does not exist')
             return render(request,'home.html')
     return redirect('home')
+
+def createCustomer(request):
+    form = SignUpForm(request.POST or None)
+    if request.user.is_authenticated:
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Customer Registered Successfully')
+            return redirect('home')
+        else:
+            context = {
+                'form':form
+            }
+            messages.error(request,'Something went wrong, please try again')
+            return render(request,'registerCustomer.html',context)
+    return redirect('home')
+
+
+def updateCustomer(request):
+    pass
+
+def deleteCustomer(request):
+    pass
