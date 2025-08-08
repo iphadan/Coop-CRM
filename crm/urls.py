@@ -10,6 +10,8 @@ urlpatterns=[
         path("registerCustomer/",views.registerCustomer,name="registerCustomer"),
         path("updateCustomer/<int:pk>/",views.updateCustomer,name="updateCustomer"),
         path("customers/",views.customers,name="customers"),
+                path("delete/<int:pk>",views.deleteCustomer,name="deleteCustomer"),
+
 
 
 

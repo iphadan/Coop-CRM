@@ -32,7 +32,9 @@
   </div>
 </div>
  <a href="{% url 'home' %}" class="btn btn-secondary">go Home</a>
-  <a href="{% url 'updateCustomer' customer.id %}" class="btn btn-secondary">Update</a>
+  <a href="{% url 'updateCustomer' customer.id %}" class="btn btn-primary">Update</a>
+    <a href="{% url 'deleteCustomer' customer.id %}" class="btn btn-close red"></a>
+
 
  
 

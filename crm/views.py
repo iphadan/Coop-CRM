@@ -124,5 +124,12 @@ def updateCustomer(request,pk):
         messages.error(request,'please, login before!')
         return redirect('home')
 
-def deleteCustomer(request):
-    pass
+def deleteCustomer(request,pk):
+    if request.user.is_authenticated:
+        customer= models.Customer.objects.get(id=pk)
+        customer.delete()
+        messages.success(request,'Customer Deleted Successfully')
+        return redirect('customers')
+    else:
+        messages.error(request,'Loging before!')
+        return redirect('home')
