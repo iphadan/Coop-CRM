@@ -15,7 +15,7 @@ class SignUpForm(UserCreationForm):
 
  
 
-class SignUpCustomer(UserCreationForm):
+class SignUpCustomer(forms.ModelForm):
     email = forms.EmailField(label="Email")
     first_name = forms.CharField(label="First Name", max_length=100)
     last_name = forms.CharField(label="Last Name", max_length=100)
