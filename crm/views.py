@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
-from .forms import SignUpForm
+from .forms import SignUpForm,SignUpCustomer
 from django.contrib.auth.models import User
 from . import models
 # Create your views here.
@@ -73,19 +73,24 @@ def showCustomer(request,pk):
             return render(request,'home.html')
     return redirect('home')
 
-def createCustomer(request):
-    form = SignUpForm(request.POST or None)
+def registerCustomer(request):
+    form = SignUpCustomer(request.POST or None)
     if request.user.is_authenticated:
-        if form.is_valid():
-            form.save()
-            messages.success(request,'Customer Registered Successfully')
-            return redirect('home')
-        else:
+        if form:
             context = {
-                'form':form
-            }
-            messages.error(request,'Something went wrong, please try again')
+                    'form':form
+                }
+            if form.is_valid():
+                form.save()
+                messages.success(request,'Customer Registered Successfully')
+                return redirect('home')
+            else:
+                messages.error(request,'Something went wrong, please try again')
+                return render(request,'registerCustomer.html',context)
+
+        else:
             return render(request,'registerCustomer.html',context)
+
     return redirect('home')
 
 

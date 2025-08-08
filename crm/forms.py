@@ -16,15 +16,17 @@ class SignUpForm(UserCreationForm):
  
 
 class SignUpCustomer(UserCreationForm):
-    email = forms.EmailField(label="Email",widget=forms.TextInput)
-    first_name = forms.CharField(label="First Name",max_length=100)
-    last_name = forms.CharField(label="Last Name",max_length=100)
-    username = forms.EmailField(label="Username",widget=forms.TextInput)
-    zipCode = forms.EmailField(label="Zip Code",widget=forms.TextInput)
-    address = forms.EmailField(label="Address ",widget=forms.TextInput)
-
-
+    email = forms.EmailField(label="Email")
+    first_name = forms.CharField(label="First Name", max_length=100)
+    last_name = forms.CharField(label="Last Name", max_length=100)
+    username = forms.CharField(label="Username")
+    zipCode = forms.CharField(label="Zip Code")
+    address = forms.CharField(label="Address")
 
     class Meta:
         model = Customer
-        fields = ('username','first_name','last_name','email','zipCode','address')
+        fields = ['email', 'first_name', 'last_name', 'username', 'zipCode', 'address']
+
+
+
+
