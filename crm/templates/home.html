@@ -39,13 +39,15 @@
 {% else %}
 <table class="table table-striped me-auto">
   <thead>
-    <header>Users Table</header>
+    <h1 class="h1">Users</h1>
     <tr>
       <th scope="col">#</th>
       <th scope="col">First name</th>
       <th scope="col">Last name</th>
       <th scope="col"> Username </th>
             <th scope="col">Email</th>
+                        <th scope="col">Joined At</th>
+
             <th>View</th>
 
     </tr>
@@ -54,10 +56,12 @@
     {% for user in users%}
   <tr>
       <th scope="row">{{user.id}}</th>
-      <td>{{user.fist_name}}</td>
+      <td>{{user.first_name}}</td>
       <td>{{user.last_name}}</td>
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
+     <td>{{user.date_joined}}</td>
+
       <td ><a href="{% url 'showUser' user.id %}"  class="bi bi-eye-fill"></a>  </td> 
 
     </tr>
@@ -73,52 +77,10 @@
 
 
 
-<table class="table table-striped me-auto">
-  <thead>
-    <header>Custoems Table</header>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First name</th>
-      <th scope="col">Last name</th>
-      <th scope="col">Username</th>
-       <th scope="col">Email</th>
-      <th scope="col">Address</th>
-      <th scope="col">Zip Code</th>
-      <th scope="col">Created At</th>
-            <th scope="col">View</th>
 
-      
-
-
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in customers %}
-    <tr>
-      <th scope="row">{{ user.id }}</th>
-      <td>{{user.fist_name}}</td>
-      <td>{{user.last_name}}</td>
-      <td>{{user.username}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.address}}</td>
-            <td>{{user.zipCode}}</td>
-            <td>{{user.dateCreatedAt}}</td>
-                 <td ><a href="{% url 'showCustomer' user.id %}"  class="bi bi-eye-fill"></a>  </td> 
-
-    </tr>
-
-    </tr>
-
-    </tr>
-
-    </tr>
-   {% endfor %}
-  </tbody>
-</table>
+  
 {% endif %}
 
-
-<a href="{% url 'registerCustomer' %}" class="btn btn-primary">Register Customer</a>
 </a>
     </div>
 

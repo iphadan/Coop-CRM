@@ -20,14 +20,25 @@ def home(request):
            return render(request,"home.html")
     else:
         if request.user.is_authenticated: 
-            users = User.objects.all()
-            customers = models.Customer.objects.all()
-            context = {'users':users,'customers':customers}
+            users = User.objects.all().order_by('id')
+            context = {'users':users}
             return render(request,"home.html",context )
+        
     return render(request,'home.html')
 def logout_user(request):
     logout(request)
     return render(request,'home.html')
+
+def customers(request):
+        if request.user.is_authenticated: 
+            customers = models.Customer.objects.all().order_by('id')
+
+            context = {'customers':customers}
+            return render(request,"customerTable.html",context)
+        else:
+            messages.error(request,'Login before !')
+            return redirect('home')
+
 
 
 def register(request):
@@ -94,8 +105,24 @@ def registerCustomer(request):
     return redirect('home')
 
 
-def updateCustomer(request):
-    pass
+def updateCustomer(request,pk):
+    customer = models.Customer.objects.get(id=pk)
+    form = SignUpCustomer(request.POST or None,instance=customer)
+    context = {
+        'form':form,
+        'id':customer.id
+    }
+    if request.user.is_authenticated:
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Customer Created Successfully')
+            return redirect('home')
+        else:
+            messages.error(request,'something went wrong, please try again!')
+            return render(request,'updateCustomer.html',context)
+    else:
+        messages.error(request,'please, login before!')
+        return redirect('home')
 
 def deleteCustomer(request):
     pass
